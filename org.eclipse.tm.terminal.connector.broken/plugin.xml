@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+<!-- Terminal connector contributions -->
+   <extension point="org.eclipse.tm.terminal.control.connectors">
+      <connector 
+            name="BrokenConnector"
+            id="org.eclipse.tm.terminal.connector.broken.BrokenConnector"
+            class="org.eclipse.tm.terminal.connector.broken.internal.BrokenConnector"/>
+   </extension>
+
+<!-- Terminal launcher delegate contributions -->
+   <extension point="org.eclipse.tm.terminal.view.ui.launcherDelegates">
+      <delegate
+            class="org.eclipse.tm.terminal.connector.broken.launcher.BrokenLauncherDelegate"
+            id="org.eclipse.tm.terminal.connector.broken.launcher"
+            label="Broken Terminal">
+      </delegate>
+   </extension>
+</plugin>
