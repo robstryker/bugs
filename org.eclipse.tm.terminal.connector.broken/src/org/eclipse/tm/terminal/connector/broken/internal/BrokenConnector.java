@@ -25,8 +25,9 @@ public class BrokenConnector extends TerminalConnectorImpl {
 	
 	public void connect(ITerminalControl control) {
 		super.connect(control);
-		connectSynchronous();
+		//connectSynchronous();
 		//connectAsynchronous();
+		connectSynchronousIgnoreInterrupt();
 	}
 	
 	private void connectAsynchronous() {
@@ -37,18 +38,35 @@ public class BrokenConnector extends TerminalConnectorImpl {
 		}.start();
 	}
 	
+	private void connectSynchronousIgnoreInterrupt() {
+		int sleepTime = 20000 + (int)(Math.random()*2000);
+		// set state
+		fControl.setState(TerminalState.CONNECTING);
+		long end = System.currentTimeMillis() + sleepTime;
+		while(System.currentTimeMillis() < end) {
+			try {
+				Thread.sleep(300);
+			} catch(InterruptedException ie) {
+				// Ignore
+			}
+		}
+
+		// I completed 
+		fControl.setState(TerminalState.CONNECTED);
+	}
+	
 	private void connectSynchronous() {
-		
+		int sleepTime = 7000 + (int)(Math.random()*2000);
 		// set state
 		fControl.setState(TerminalState.CONNECTING);
 
-		System.out.println("UI Freeze on connect");
+		//System.out.println("UI Freeze on connect");
 		final LinkedBlockingQueue<Integer> queue = new LinkedBlockingQueue<Integer>();
-		// Simulate something that waits 12 seconds before 'working'
+		// Simulate something that waits sleeptime seconds before 'working'
 		new Thread() {
 			public void run() {
 				try {
-					Thread.sleep(12000);
+					Thread.sleep(sleepTime);
 				} catch(InterruptedException ie) {
 				}
 				try {
@@ -74,13 +92,15 @@ public class BrokenConnector extends TerminalConnectorImpl {
 	}
 
 	protected void doDisconnect() {
-		System.out.println("UI Freeze on disconnect");
+		int sleepTime = 2000 + (int)(Math.random()*2000);
+
+		//System.out.println("UI Freeze on disconnect");
 		final LinkedBlockingQueue<Integer> queue = new LinkedBlockingQueue<Integer>();
-		// Simulate something that waits 12 seconds before 'working'
+		// Simulate something that waits 3 seconds before 'working'
 		new Thread() {
 			public void run() {
 				try {
-					Thread.sleep(12000);
+					Thread.sleep(sleepTime);
 				} catch(InterruptedException ie) {
 				}
 				try {
