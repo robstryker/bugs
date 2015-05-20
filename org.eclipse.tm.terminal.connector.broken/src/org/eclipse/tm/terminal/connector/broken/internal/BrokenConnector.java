@@ -25,7 +25,20 @@ public class BrokenConnector extends TerminalConnectorImpl {
 	
 	public void connect(ITerminalControl control) {
 		super.connect(control);
-
+		connectSynchronous();
+		//connectAsynchronous();
+	}
+	
+	private void connectAsynchronous() {
+		new Thread() {
+			public void run() {
+				connectSynchronous();
+			}
+		}.start();
+	}
+	
+	private void connectSynchronous() {
+		
 		// set state
 		fControl.setState(TerminalState.CONNECTING);
 

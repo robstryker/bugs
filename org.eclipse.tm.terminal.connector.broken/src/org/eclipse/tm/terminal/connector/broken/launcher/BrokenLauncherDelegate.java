@@ -2,7 +2,6 @@ package org.eclipse.tm.terminal.connector.broken.launcher;
 
 import java.util.Map;
 
-import org.eclipse.core.expressions.Expression;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.tm.internal.terminal.provisional.api.ITerminalConnector;
 import org.eclipse.tm.internal.terminal.provisional.api.TerminalConnectorExtension;
