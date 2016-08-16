@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="Broken Progress Monitor"
+            id="broken-progressbar2.commands.category">
+      </category>
+      <command
+            name="Broken Progress Monitor"
+            categoryId="broken-progressbar2.commands.category"
+            id="broken-progressbar2.commands.sampleCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="broken-progressbar2.commands.sampleCommand"
+            class="brokenprogressbar2.handlers.SampleHandler">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="broken-progressbar2.commands.sampleCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+6"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="Sample Menu"
+               mnemonic="M"
+               id="broken-progressbar2.menus.sampleMenu">
+            <command
+                  commandId="broken-progressbar2.commands.sampleCommand"
+                  mnemonic="S"
+                  id="broken-progressbar2.menus.sampleCommand">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="broken-progressbar2.toolbars.sampleToolbar">
+            <command
+                  commandId="broken-progressbar2.commands.sampleCommand"
+                  icon="icons/sample.gif"
+                  tooltip="Demonstrate slow progress"
+                  id="broken-progressbar2.toolbars.sampleCommand">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+
+</plugin>
