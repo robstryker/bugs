@@ -17,7 +17,11 @@ public class SampleHandler extends AbstractHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		
+		// To demonstrate the progress dialog operating quickly, use false
+		// To demonstrate the progress dialog operating very slowly, use true
 		Job longJob = new LongRunningJob(true, 300000);
+		
+		
 		longJob.schedule();
 		IProgressService progressService= PlatformUI.getWorkbench().getProgressService();
 		progressService.showInDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), longJob);
